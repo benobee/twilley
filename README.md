@@ -1,4 +1,3 @@
-# sqs-js
-Starter project for building squarespace modules with ES6 and webpack.
-"# twilley" 
+
+https://stacy-twilley.squarespace.com
 "# twilley" 
