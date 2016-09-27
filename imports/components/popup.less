@@ -1,0 +1,58 @@
+.app-module.popup{
+	position: fixed;
+	top:50%;
+	left:50%;
+    transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+    opacity:0;
+    visibility: hidden;
+	transition: opacity 0.3s;
+	border:2px solid #CDA99D;
+	background:#F5EFEC;
+	z-index:899;
+    max-width:550px;
+    min-height:300px;
+    padding-left:3em;
+    padding-right:3em;
+    display: flex;
+    z-index:-9999;
+    h3{
+        font-size:1.5em !important;
+        font-weigt:800 !important;
+    }
+    .newsletter-form-button{
+        color:#CDA99D !important;
+        box-shadow:none !important;
+        border:2px solid #CDA99D !important;
+        &:hover{
+            background:#CDA99D !important;
+            color:black !important;
+        }
+    }
+    .js-target{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+	div{
+		opacity:1 !important;
+		background:none;
+	}
+    &.is-rendered{
+    	visibility: visible;
+    	opacity:1;
+        z-index:99999;
+    }
+    .close{
+    	position: absolute;
+    	right:0;
+    	padding:1em;
+    	font-size:2em;
+    	opacity:0.5;
+    	color:#CDA99D;
+    	z-index:999;
+    	cursor:pointer;
+    }
+}
