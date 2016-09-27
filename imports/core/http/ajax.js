@@ -1,4 +1,4 @@
-import $ from 'properjs-hobo';
+import $ from 'jquery';
 
 class Ajax_$ {
 	constructor(){
@@ -6,28 +6,13 @@ class Ajax_$ {
 	}
 	get(url, options){
         return $.ajax({
-            // String url
-            url: url,
-
-            // Object hash to pass to endpoint
             data: options,
-
-            // This can be "html", "json" or "jsonp"
+            url: url,
             dataType: "jsonp",
-
-            // The request method type, "POST" etc...
-            method: "GET",
-
-            // This is for passing headers
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded"
+            success: (result) => {
+                return result;
+                console.log(result);
             }
-
-        }).then(( response ) => {
-            return response;
-
-        }).catch(( error ) => {
-            return error;
         });
 	}
 };

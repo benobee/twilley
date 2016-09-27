@@ -1,8 +1,9 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Site } from './imports/core/index';
-import { Popup, Newsletter } from './imports/components/index';
-import $ from 'jquery-slim';
+import { OutOfStockPopup, NewsletterPopup } from './imports/components/index';
+import $ from 'jquery';
+
 
 const css = require("./main.less");
 
@@ -28,14 +29,16 @@ class App_Build {
         
         this.newsletter();
         this.popup();
+
+        console.log(this);
     }
     newsletter() {
         //<Popup html={DOM} target={DOM} cookies={bool} targetUrl={href} delay={NUM} customFunction={func} auto={bool}/>         
         const html = $('.sqs-block.newsletter-block.sqs-block-newsletter');
-        const target = $('.app-module.popup.newsletter > .js-target');
+        const target = $('.app-module.popup.newsletter .js-target');
 
         this.newsletterPopup = new Module(
-            <Newsletter
+            <NewsletterPopup
                 html={html}
                 target={target}
                 cookies={true}
@@ -45,15 +48,21 @@ class App_Build {
     }
     popup() {
         //if user selects product that is out of stock lightbox appears
-        const productPage = $(".ProductItem");
+
+        ///////////
+        // @testing
+        /////////// 
+        if(window.location.pathname == "/test"){
+
+        const productPage = $(".ProductItem, .product-block");
 
         if (productPage.length > 0) {
 
-            const targetUrl = this.site.host + '/out-of-stock-form';
-            const target = $('.app-module.out-of-stock > .js-target');
+            const targetUrl = '/out-of-stock-form';
+            const target = $('.app-module.out-of-stock .js-target');
 
-            this.productpagePopup = new Module(
-                <Popup
+            this.outOfStockPopup = new Module(
+                <OutOfStockPopup
                     targetUrl={targetUrl}
                     target={target}
                     delay={100}
@@ -61,6 +70,11 @@ class App_Build {
                 /> 
             );
         };
+
+        }
+        ///////////
+        // @testing
+        ///////////
     }
 };
 

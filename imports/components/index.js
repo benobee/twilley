@@ -1,7 +1,7 @@
-import Popup from './Popup.jsx';
-import Newsletter from  './Newsletter.jsx';
+import OutOfStockPopup from './OutOfStockPopup.jsx';
+import NewsletterPopup from  './NewsletterPopup.jsx';
 
 export{
-	Popup,
-	Newsletter
+	OutOfStockPopup,
+	NewsletterPopup
 }

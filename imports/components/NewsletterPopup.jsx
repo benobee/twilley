@@ -1,18 +1,18 @@
 import React from 'react';
 import { Cookie } from '../core/index';
-import $ from 'jquery-slim';
+import $ from 'jquery';
 
-class Newsletter extends React.Component {
+class NewsletterPopup extends React.Component {
     constructor(props) {
         super(props);
         this.displayName = 'Newsletter';
 
-        this.html = { __html : this.props.html[0].innerHTML };        
-        this.className = this.props.html[0].className;
+        if(this.props.html !== undefined){
+            this.html = { __html : this.props.html[0].innerHTML };   
+            this.className = this.props.html[0].className;           
+        }
+
         this.target = this.props.target[0];
-
-        console.log(this);
-
     }
     componentWillMount() {
         const hasBeenVisible = Cookie.get(this.displayName);
@@ -45,4 +45,4 @@ class Newsletter extends React.Component {
     }
 }
 
-export default Newsletter;
+export default NewsletterPopup;

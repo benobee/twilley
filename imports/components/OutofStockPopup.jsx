@@ -1,8 +1,7 @@
 import React from 'react';
-import $ from 'jquery-slim';
-import { HTTP } from '../core/index';
+import $ from 'jquery';
 
-class Popup extends React.Component {
+class OutOfStockPopup extends React.Component {
     constructor(props) {
         super(props);
         this.displayName = this.props.displayName;
@@ -16,30 +15,33 @@ class Popup extends React.Component {
         }
 
         this.target = this.props.target[0];
-        this.getForm();
-
-        //console.log(this);
     }
     getForm() {
-        //get data from form 
-        const request = HTTP.get(this.props.targetUrl, {format: "json"});
-
-        $.when(request).then( (data) => {
-            this.setState({html: {__html: data.mainContent} });
+        //get data from form
+        $.ajax({
+            data: {format: "json"},
+            url: this.props.targetUrl,
+            dataType: "jsonp",
+            success: (result) => {
+                this.setState({html: {__html: result.mainContent} });            
+            },
+            error: () => {
+                this.getForm();
+            }
         });
     }
-    stockListen(){
+    stockListen() {
 
         $(".product-variants select").on("change", () => {
 
             const selected = $('.product-variants').attr("data-selected-variant");
 
-            if(selected !== undefined){
+            if(selected !== undefined) {
 
                 const data = JSON.parse(selected);
                 const title = $('.ProductItem-details-title').html();
                
-                if(data.qtyInStock == 0){
+                if(data.qtyInStock == 0) {
                    //send title value to hidden input form field
                    const hiddenItemField = $('input[name="SQF_STORE_ITEM"]');
 
@@ -48,8 +50,7 @@ class Popup extends React.Component {
                    this.makeVisible();
                 }
             }
-        });            
-
+        });
     }
     makeVisible() {
         setTimeout( () => {
@@ -62,12 +63,17 @@ class Popup extends React.Component {
     	});
     }
     componentWillMount() {
-    	this.closePopupWhenClicked();
-        this.stockListen();   	     
+        this.getForm(); 	     
+    }
+    componentDidMount() {
+        this.closePopupWhenClicked();
+        this.stockListen();   
     }
     render() {
-        return <div className={this.className} dangerouslySetInnerHTML={this.state.html} />;
+        const html = this.state.html;
+
+        return <div className={this.className} dangerouslySetInnerHTML={html} />;
     }
 }
 
-export default Popup;
+export default OutOfStockPopup;
