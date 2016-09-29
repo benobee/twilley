@@ -32,8 +32,9 @@ class OutOfStockPopup extends React.Component {
     }
     stockListen() {
 
-        $(".product-variants select").on("change", () => {
+        $(".product-variants select").on("change", (e) => {
 
+            const selectedSize = $(e.currentTarget).val();
             const selected = $('.product-variants').attr("data-selected-variant");
 
             if(selected !== undefined) {
@@ -43,9 +44,14 @@ class OutOfStockPopup extends React.Component {
                
                 if(data.qtyInStock == 0) {
                    //send title value to hidden input form field
+                   const hiddenSizeField = $('input[name="SQF_SIZE"]');                  
                    const hiddenItemField = $('input[name="SQF_STORE_ITEM"]');
 
                    $(hiddenItemField).val(title);
+                   $(hiddenSizeField).val(selectedSize);
+
+                   $(".form-wrapper").before("<div id='stockInfo'></div>");
+                   $("#stockInfo").html("<p>" + title + " (" + selectedSize + ")</p>");
 
                    this.makeVisible();
                 }
@@ -58,6 +64,8 @@ class OutOfStockPopup extends React.Component {
         }, this.props.delay);  
     }
     closePopupWhenClicked(){
+        $("#stockInfo").html("");
+        
     	$(".close").on("click", () => {
     		$(".app-module.out-of-stock").removeClass("is-rendered");
     	});
