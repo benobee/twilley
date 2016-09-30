@@ -51,7 +51,7 @@ class OutOfStockPopup extends React.Component {
                    $(hiddenSizeField).val(selectedSize);
 
                    $(".form-wrapper").before("<div id='stockInfo'></div>");
-                   $("#stockInfo").html("<p>" + title + " (" + selectedSize + ")</p>");
+                   $("#stockInfo").html("<p>" + title + " (size " + selectedSize + ")</p>");
 
                    this.makeVisible();
                 }
@@ -79,8 +79,16 @@ class OutOfStockPopup extends React.Component {
     }
     render() {
         const html = this.state.html;
-
-        return <div className={this.className} dangerouslySetInnerHTML={html} />;
+        return (
+            <div className="content-container">
+                <div className="content">
+                    <div className="close">✕</div>
+                    <div className="js-target">
+                        <div className={this.className} dangerouslySetInnerHTML={html} />
+                    </div>
+                </div>
+            </div>
+        );
     }
 }
 

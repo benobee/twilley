@@ -41,7 +41,16 @@ class NewsletterPopup extends React.Component {
     	}
     }
     render() {
-        return <div className={this.className} dangerouslySetInnerHTML={this.html} />;
+        return (
+                <div className="content-container">
+                    <div className="content">
+                        <div className="close">✕</div>
+                        <div className="js-target">
+                            <div className={this.className} dangerouslySetInnerHTML={this.html} />
+                        </div>
+                    </div>
+                </div>           
+        );
     }
 }
 

@@ -35,7 +35,7 @@ class App_Build {
     newsletter() {
         //<Popup html={DOM} target={DOM} cookies={bool} targetUrl={href} delay={NUM} customFunction={func} auto={bool}/>         
         const html = $('.sqs-block.newsletter-block.sqs-block-newsletter');
-        const target = $('.app-module.popup.newsletter .js-target');
+        const target = $('.app-module.popup.newsletter');
 
         this.newsletterPopup = new Module(
             <NewsletterPopup
@@ -47,19 +47,13 @@ class App_Build {
         );
     }
     popup() {
-        //if user selects product that is out of stock lightbox appears
-
-        ///////////
-        // @testing
-        /////////// 
-        if(window.location.pathname == "/test"){
 
         const productPage = $(".ProductItem, .product-block");
 
         if (productPage.length > 0) {
 
             const targetUrl = '/out-of-stock-form';
-            const target = $('.app-module.out-of-stock .js-target');
+            const target = $('.app-module.out-of-stock');
 
             this.outOfStockPopup = new Module(
                 <OutOfStockPopup
@@ -70,11 +64,6 @@ class App_Build {
                 /> 
             );
         };
-
-        }
-        ///////////
-        // @testing
-        ///////////
     }
 };
 
